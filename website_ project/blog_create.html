@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Form</title>
+</head>
+<body>
+    <h1 class="btm">This is Create Form</h1>
+    <form id="myForm">
+    <label for="name">Title:</label>
+    <input type="text" id="name" Title="Title" required><br>
+    <div>
+        <label for="email">Name:</label>
+        <input type="text" id="name" name="Name" required><br>
+    </div>
+    <div>
+      <label for="email">Post:</label>
+      <input type="text" id="name" post="Post" required><br>
+  </div>
+  <div>
+    <label for="email">Category:</label>
+    <input type="text" id="name" email="Category" required><br>
+</div>
+    
+    <div class="btn">
+        <label for="message">Date Post:</label>
+        <input type="text" id="name" date post="Date Post" required><br>
+    </div>
+   
+  
+    <button type="post">Post</button>
+
+  </form>
+
+
+  <script>
+    document.getElementById('myForm').addEventListener('submit', async function(event) {
+        event.preventDefault(); // Prevent the default form submission
+
+        // Gather the form data
+        const formData = {
+            title: document.getElementById('title').value,
+            name: document.getElementById('name').value,
+            post: document.getElementById('post').value,
+            category: document.getElementById('category').value,
+            datePost: document.getElementById('datePost').value
+        };
+
+        try {
+            // Perform the POST request
+            const response = await fetch('http://127.0.0.1:8000/api/blog-posts/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+
+            if (response.ok) {
+                // Handle the response
+                const result = await response.json();
+                console.log('Success:', result);
+            } else {
+                console.error('Error:', response.statusText);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    });
+</script>
+
+
+    
+    <style>
+        .btm{
+            text-align:center;
+            transform: rotate(1800deg);
+            }
+      
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+          }
+          
+         form {
+            width: 300px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 50px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+          }
+          .btn{
+            width: 300px;
+            padding: 10px;
+             width: 100%;
+             border-radius: 0px;
+             margin: 10px 0;
+        
+            
+
+          }
+          
+         * label {
+            display: block;
+            margin-bottom: 10px;
+          }
+          
+          input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 0px;
+          }
+          
+          button {
+            background-color:black;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+          }
+          
+          button:hover {
+            background-color:black;
+          }
+    </style>
+        
+    
+</body>
+</html>
